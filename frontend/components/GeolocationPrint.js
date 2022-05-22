@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import NearbyRestaurants from "./NearbyRestaurants";
 const data =  [
   {
@@ -109,17 +109,21 @@ const data =  [
 ];
 function GeolocationPrint({ address }) {
   const district = `${address.region_2depth_name}`;
+  const [params, setParams] = useState('');
+
 // 좌표값 -> 행정동 출력 -> url을 위해 영어로 바꿈
   useEffect(() => {
       {data && data.map((item, i) => {
         if(district === `${item.district}`){
-            const params = `${item.value}`;
-            console.log(params)
+            // const params = `${item.value}`;
+            // console.log(params)
+            setParams(`${item.value}`)
         }
       })}
     });
   return (
     <>
+    <NearbyRestaurants params={params} />
     </>
   )
 }
