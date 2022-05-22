@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Script from 'next/script'
+import Geolocation from '../components/Geolocation'
 
 import Intro from '../components/Intro'
 import MainLayout from '../components/MainLayout'
@@ -15,6 +16,7 @@ export default function Home() {
       {/* <Script src="//dapi.kakao.com/v2/maps/sdk.js?appkey={process.env.NEXT_PUBLI.KAKAOMAP_KEY}"  /> */}
       <MainLayout>
         <Intro />
+        <Geolocation />
       </MainLayout>
     </div>
   )
