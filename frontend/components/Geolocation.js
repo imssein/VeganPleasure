@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Axios from "axios";
 import axios from "axios";
-import AddrList from "./AddrList";
+import GeolocationPrint from "./GeolocationPrint";
 function Geolocation(props) {
     const [address, setAddress] = useState([]);
 
@@ -34,7 +33,7 @@ function Geolocation(props) {
 
   return(
       <>
-      <AddrList address={address} />
+      <GeolocationPrint address={address} />
       </>
   )
 }
