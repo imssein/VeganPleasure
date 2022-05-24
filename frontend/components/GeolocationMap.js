@@ -6,7 +6,7 @@ export default function GeolocationMap() {
   
   useEffect(() => {
     const $script = document.createElement("script");
-    $script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${key}&autoload=false`;
+    $script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${key}&autoload=false&libraries=services`;
     console.log(process.env.NEXT_PUBLIC_KAKAOMAP_KEY);
     $script.addEventListener("load", () => setMapLoaded(true));
     document.head.appendChild($script);
@@ -23,7 +23,7 @@ export default function GeolocationMap() {
               };
         var map = new kakao.maps.Map(container, options);
 
-        // 사용자 위치에 마커 표시하기
+      // 사용자 위치에 마커 표시하기
       if (navigator.geolocation) {
         //사용자 위치를 geolocation.getCurrentPosition을 이용하여
         // latitude와 longitude를 받아온다.
@@ -36,7 +36,9 @@ export default function GeolocationMap() {
             center: new kakao.maps.LatLng(latitude, longitude),
             levle: 3,
           };
+          //현 위치 좌표 화면에 출력
           //console.log(latitude, longitude)
+          
           // 지도를 표시할 div와 지도 옵션으로 지도를 생성한다.
           var map = new kakao.maps.Map(container, locPosition);
           // 마커가 표시될 위치
@@ -58,6 +60,11 @@ export default function GeolocationMap() {
  }),[mapLoaded];
 
 return(
-         <div id="map" style={{ width: "700px", height: "300px" }}></div>
+
+         <div id="map" style={{ width: "700px", height: "300px" }}>
+
+         </div>
+         
+         
     )
 }

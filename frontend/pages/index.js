@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import Script from 'next/script'
-
 import Intro from '../components/Intro'
 import MainLayout from '../components/MainLayout'
+
 
 
 
