@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,8 +48,10 @@ public class StoreController {
     @ApiOperation("맛집 상세 조회")
     @GetMapping("/detail/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public StoreDetailDto getStore(@PathVariable("id") Long id){
-        return new StoreDetailDto(storeRepository.findByIdFetch(id));
+    public List<StoreDetailDto> getStore(@PathVariable("id") Long id){
+        List<StoreDetailDto> list = new ArrayList<>();
+        list.add(new StoreDetailDto(storeRepository.findByIdFetch(id)));
+        return list;
     }
 
     @ApiOperation("맛집 이미지 출력")
