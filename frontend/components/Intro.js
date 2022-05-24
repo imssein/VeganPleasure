@@ -1,7 +1,6 @@
 import React from 'react';
 import Description from './Description';
-import GeolocationMap from './GeolocationMap';
-import GeolocationRestaurant from './GeolocationRestaurant';
+
 import SeoulMap from './SeoulMap';
 
 function Intro(props) {
@@ -15,7 +14,7 @@ function Intro(props) {
             {/* 서울시 자치구 선택 지도 */}
             <SeoulMap /> 
             {/* <List /> */}
-            <GeolocationRestaurant />
+           
         </div>
     );
 }

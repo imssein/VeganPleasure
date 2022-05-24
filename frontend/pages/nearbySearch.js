@@ -1,8 +1,9 @@
 import React from 'react';
 import FilterSearch from '../components/FilterSearch';
-import GeolocationMap from '../components/GeolocationMap';
 import MainLayout from '../components/MainLayout';
 import PageName from '../components/PageName';
+import Geolocation from '../components/Geolocation';
+
 
 function nearbySearch(props) {
     return (
@@ -17,10 +18,10 @@ function nearbySearch(props) {
                 </div>
                 {/* 지도 */}
                 <div className='col-span-2'>
-                    <GeolocationMap />
-                </div>
+                    <Geolocation />         
                 {/* 식당 리스트 */}
                 </div>
+            </div>
             </div>
         </MainLayout>
     );
