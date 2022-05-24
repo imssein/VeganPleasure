@@ -21,6 +21,7 @@ function Map() {
             <Description />
             {/* 서울시 자치구 선택 지도 */}
             <SeoulMap /> 
+
         </div>
         {/* 지역구명 */}
         <District params={params} />

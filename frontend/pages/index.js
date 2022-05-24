@@ -1,10 +1,8 @@
 import Head from 'next/head'
 import Script from 'next/script'
-import Geolocation from '../components/Geolocation'
-
 import Intro from '../components/Intro'
 import MainLayout from '../components/MainLayout'
-import NearbyRestaurants from '../components/NearbyRestaurants'
+
 
 
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import GeolocationDistrict from "./GeolocationDistrict";
-
+import GeolocationPrint from "./GeolocationPrint";
 function Geolocation() {
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
@@ -16,6 +16,7 @@ function Geolocation() {
   }, [latitude, longitude]);
   return (
     <div>
+    <GeolocationPrint latitude={latitude} longitude={longitude} />
       <GeolocationDistrict latitude={latitude} longitude={longitude} />
     </div>
   );

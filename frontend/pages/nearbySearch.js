@@ -10,7 +10,7 @@ function nearbySearch(props) {
         <MainLayout>
             <div className='max-w-6xl mx-auto text-center my-11'>
                 {/* 타이틀 */}
-                <PageName name="내주변 맛집" />
+                {/* <PageName name="내주변 맛집" /> */}
                 <div className=' grid grid-cols-3 gap-4 my-11'>
                 {/* 필터 */}
                 <div className='bg-rose-200'>

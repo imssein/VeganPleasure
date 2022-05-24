@@ -16,7 +16,7 @@ function District({ params }) {
         {/* 클릭한 자치구명 */}
         <div className="text-2xl font-extrabold text-lime-700 mb-24">
             {item[0].district}
-        </div>
+        </div> 
         {/* 식당리스트 */}
         <div className="border">
               {item.map((item) => (

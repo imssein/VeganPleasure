@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useSWR from "swr";
+import District from "./District";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -27,7 +28,7 @@ function NearbyRestaurant({ params, longitude, latitude }) {
       if (longitude && latitude) {
         let locPosition = {
           center: new kakao.maps.LatLng(latitude, longitude),
-          level: 3,
+          level: 5,
         };
         var map = new kakao.maps.Map(container, locPosition);
         var markerPosition = new kakao.maps.LatLng(latitude, longitude);
@@ -67,7 +68,8 @@ function NearbyRestaurant({ params, longitude, latitude }) {
 
   return (
     <div>
-      <div id="map" style={{ width: "700px", height: "300px" }}></div>
+      <div id="map" className="w-full h-80 mb-16"></div>
+      <District params={params} />
     </div>
   );
 }
