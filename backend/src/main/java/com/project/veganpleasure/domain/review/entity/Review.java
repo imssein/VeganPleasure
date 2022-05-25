@@ -16,6 +16,7 @@ public class Review extends BaseEntity {
     @Id @GeneratedValue
     @Column(name = "review_id")
     private Long id;
+    @Lob
     private String content;
     private Long starRating;
     @ManyToOne(fetch = FetchType.LAZY)

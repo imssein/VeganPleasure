@@ -76,9 +76,6 @@ public class InitDb {
                 store.setVegetarianTypes(jsonObject.get("vegetarianType").toString());
                 store.setDistrict(District.valueOf(jsonObject.get("district").toString()));
                 store.setUploadFile(uploadFile);
-                if (store.getMenu().length() > 255) {
-                    store.setMenu(store.getMenu().substring(0, 255));
-                }
                 storeRepository.save(store);
             }
             Member member1 = Member.builder()

@@ -20,6 +20,7 @@ public class Post extends BaseEntity {
     @Column(name = "post_id")
     private Long id;
     private String title;
+    @Lob
     private String content;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
