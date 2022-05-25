@@ -28,6 +28,7 @@ public class Store extends BaseEntity {
     private String phoneNumber;
     private int likes;
     private Long starRating;
+    @Lob
     private String menu;
     @OneToMany(mappedBy = "store")
     private List<Review> reviewList = new ArrayList<>();
