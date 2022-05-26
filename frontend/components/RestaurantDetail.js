@@ -6,7 +6,7 @@ import RestaurantPositionMap from "./RestaurantPositionMap";
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
 function RestaurantDetail({ params }) {
-  const url = `http://localhost:8000/restaurants/${params}`;
+  const url = `http://localhost:9090/v1/api/stores/detail/${params}`;
 
   const { data: item, error } = useSWR(url, fetcher);
   if (error) return "에러발생";
@@ -23,7 +23,7 @@ function RestaurantDetail({ params }) {
             <div className="flex justify-between">
               <div className="flex">
                 <p className="text-3xl">{item.name}</p>
-                <p className="text-3xl ml-4 text-lime-700">4.9</p>
+                <p className="text-3xl ml-4 text-lime-700">{item.starRating}</p>
               </div>
               <div className="flex">
                 {/* 리뷰 */}
@@ -51,11 +51,11 @@ function RestaurantDetail({ params }) {
               </div>
               <div className="my-3 grid-cols-3 gap-4 grid">
                 <p>채식 타입</p>
-                <p className="col-span-2">{item.type}</p>
+                <p className="col-span-2">{item.vegetarianTypes}</p>
               </div>
               <div className="my-3 grid-cols-3 gap-4 grid">
                 <p>업종</p>
-                <p className="col-span-2">{item.restaurant_type}</p>
+                <p className="col-span-2">{item.category}</p>
               </div>
               <div className="grid-cols-3 gap-4 grid">
                 <p>메뉴</p>

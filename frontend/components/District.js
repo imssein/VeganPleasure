@@ -5,7 +5,7 @@ const fetcher = (url) => fetch(url).then((r) => r.json());
 
 function District({ params }) {
 
-  const url = `http://localhost:8000/seoul/${params}`;
+  const url = `http://localhost:9090/v1/api/stores/${params}`;
 
   const { data: item, error } = useSWR(url, fetcher);
   if (error) return "에러발생";
@@ -24,10 +24,10 @@ function District({ params }) {
                 <Link href={`/restaurants/${item.id}`}>
                 <div className='border-b-2 pt-2 pb-9 my-4 mx-4'>     
                     <p className='text-xl'>{item.name}</p>
-                    <p>{item.restaurant_type}</p>
-                    <p className="text-lime-700">{item.type}</p>
+                    <p>{item.category}</p>
+                    <p className="text-lime-700">{item.vegetarianTypes}</p>
                     {/* <p>{item.address}</p> */} 
-                    <p>찜 | 리뷰수 | 평점</p>
+                    <p>찜 {item.likes} | 리뷰수 {item.reviewCount} | 평점 {item.starRating} </p>
                 </div>
                 </Link>
                 </div>

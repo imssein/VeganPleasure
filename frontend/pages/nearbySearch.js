@@ -1,7 +1,6 @@
 import React from 'react';
 import FilterSearch from '../components/FilterSearch';
 import MainLayout from '../components/MainLayout';
-import PageName from '../components/PageName';
 import Geolocation from '../components/Geolocation';
 
 

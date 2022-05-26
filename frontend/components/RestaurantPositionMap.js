@@ -4,7 +4,7 @@ import useSWR from "swr";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 function RestaurantPositionMap({ params }) {
-  const url = `http://localhost:8000/restaurants/${params}`;
+  const url = `http://localhost:9090/v1/api/stores/detail/${params}`;
 //   console.log(`${params}`)
   const { data, error } = useSWR(url, fetcher);
 
@@ -44,8 +44,8 @@ function RestaurantPositionMap({ params }) {
                 map: map,
                 position: coords,
               });
-              console.log(`${data.id}`);
-              console.log(`${data.address}`)
+              // console.log(`${data.id}`);
+              // console.log(`${data.address}`)
 
               map.setCenter(coords);
             }

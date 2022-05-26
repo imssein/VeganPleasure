@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import useSWR from "swr";
 import District from "./District";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
+
 function NearbyRestaurant({ params, longitude, latitude }) {
   const [mapLoaded, setMapLoaded] = useState(false);
   const key = process.env.NEXT_PUBLIC_KAKAOMAP_KEY;
-  const url = `http://localhost:8000/seoul/${params}`;
+  const url = `http://localhost:9090/v1/api/stores/${params}`;
 
   const { data, error } = useSWR(url, fetcher);
+
 
   useEffect(() => {
     const $script = document.createElement("script");
@@ -26,7 +28,7 @@ function NearbyRestaurant({ params, longitude, latitude }) {
       var container = document.getElementById("map");
 
       if (longitude && latitude) {
-        let locPosition = {
+        var locPosition = {
           center: new kakao.maps.LatLng(latitude, longitude),
           level: 5,
         };
@@ -57,9 +59,9 @@ function NearbyRestaurant({ params, longitude, latitude }) {
             });
         }
       } else {
-        let locPosition = {
+        var locPosition = {
           center: new kakao.maps.LatLng(33.450701, 126.570667),
-          levle: 3,
+          levle: 5,
         };
         var map = new kakao.maps.Map(container, locPosition);
       }
