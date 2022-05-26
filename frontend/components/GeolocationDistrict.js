@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import GeolocationParams from "./GeolocationParams";
 
 function GeolocationDistrict({ latitude, longitude }) {
   const [district, setDistrict] = useState("");
   useEffect(() => {
     if (longitude && latitude) {
-      axios
-        .get(
-          `https://dapi.kakao.com/v2/local/geo/coord2regioncode.json?x=${longitude}&y=${latitude}`,
+      try{
+      axios.get(`https://dapi.kakao.com/v2/local/geo/coord2regioncode.json?x=${longitude}&y=${latitude}`,
           {
             headers: {
               Authorization: `KakaoAK ${process.env.NEXT_PUBLIC_REST_API_KEY}`,
@@ -18,9 +17,15 @@ function GeolocationDistrict({ latitude, longitude }) {
         .then((result) => {
           setDistrict(result.data.documents[0].region_2depth_name);
         });
-    } else {
+    } catch (error){
+      console.log('Error');
+    
     }
-  });
+  }
+
+    else {
+    }
+  },[district]);
   return (
     <div>
       <GeolocationParams
