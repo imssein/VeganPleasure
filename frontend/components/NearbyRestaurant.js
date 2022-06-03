@@ -12,14 +12,13 @@ function NearbyRestaurant({ params, longitude, latitude }) {
 
   const { data, error } = useSWR(url, fetcher);
 
-
   useEffect(() => {
     const $script = document.createElement("script");
     $script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${key}&autoload=false&libraries=services`;
     console.log(process.env.NEXT_PUBLIC_KAKAOMAP_KEY);
     $script.addEventListener("load", () => setMapLoaded(true));
     document.head.appendChild($script);
-  }, []);
+  });
 
   useEffect(() => {
     if (!mapLoaded) return;

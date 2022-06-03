@@ -4,6 +4,7 @@ import GeolocationParams from "./GeolocationParams";
 
 function GeolocationDistrict({ latitude, longitude }) {
   const [district, setDistrict] = useState("");
+  
   useEffect(() => {
     if (longitude && latitude) {
       try{
@@ -19,13 +20,11 @@ function GeolocationDistrict({ latitude, longitude }) {
         });
     } catch (error){
       console.log('Error');
-    
     }
   }
-
     else {
     }
-  },[district]);
+  },[longitude, latitude]);
   return (
     <div>
       <GeolocationParams

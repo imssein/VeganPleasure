@@ -140,7 +140,7 @@ function GeolocationParams({ district, longitude, latitude }) {
         }
       });
     }
-  });
+  }, [district]);
   return (
     <div>
       <NearbyRestaurant
