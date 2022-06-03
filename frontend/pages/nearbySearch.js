@@ -12,7 +12,7 @@ function nearbySearch(props) {
                 {/* <PageName name="내주변 맛집" /> */}
                 <div className=' grid grid-cols-3 gap-4 my-11'>
                 {/* 필터 */}
-                <div className='bg-rose-200'>
+                <div>
                     <FilterSearch />
                 </div>
                 {/* 지도 */}

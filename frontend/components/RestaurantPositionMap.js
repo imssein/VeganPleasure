@@ -18,7 +18,7 @@ function RestaurantPositionMap({ params }) {
     console.log(process.env.NEXT_PUBLIC_KAKAOMAP_KEY);
     $script.addEventListener("load", () => setMapLoaded(true));
     document.head.appendChild($script);
-  }, []);
+  });
 
   useEffect(() => {
     if (!mapLoaded) return;

@@ -1,10 +1,12 @@
 import React from 'react';
+import MainLayout from '../components/MainLayout';
+import PageName from '../components/PageName';
 
 function recipe(props) {
     return (
-        <div>
-            레시피페이지
-        </div>
+        <MainLayout>
+            <PageName name="채식레시피" />
+        </MainLayout>
     );
 }
 

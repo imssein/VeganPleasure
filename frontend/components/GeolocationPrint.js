@@ -24,7 +24,7 @@ function GeolocationPrint({latitude, longitude}) {
     return (
         <div className="w-full h-32 "> 
         <div className="font-bold text-2xl border-b-2 py-4">
-            내 주변 맛집 (__곳)
+            내 주변 맛집
         </div>
         <div className="flex my-4 justify-end">
             <BsFillGeoAltFill size="20" className="mr-2"/>

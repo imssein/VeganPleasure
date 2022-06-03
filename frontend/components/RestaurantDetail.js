@@ -13,11 +13,11 @@ function RestaurantDetail({ params }) {
   if (!item) return "로딩중..";
 
   return (
-    <div className="mx-auto max-w-6xl my-11 grid grid-cols-3 gap-4 border">
+    <div className="mx-auto max-w-6xl my-11 grid grid-cols-3 gap-4">
       {/* 식당명 / 평점 / 리뷰쓰기 / 찜하기 */}
       {/* 본 사람 리뷰개수 찜개수 */}
       {/* 식당 상세정보 */}
-      <div className="col-span-2 bg-rose-200">
+      <div className="col-span-2">
         {item.map((item) => (
           <>
             <div className="flex justify-between">
@@ -70,7 +70,7 @@ function RestaurantDetail({ params }) {
         ))}
       </div>
       {/* 카카오 맵 */}
-      <div className="border">
+      <div className="">
           <RestaurantPositionMap params={params} />
       </div>
     </div>
