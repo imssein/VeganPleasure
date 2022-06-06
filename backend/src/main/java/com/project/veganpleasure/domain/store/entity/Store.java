@@ -1,5 +1,6 @@
 package com.project.veganpleasure.domain.store.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.veganpleasure.domain.common.entity.BaseEntity;
 import com.project.veganpleasure.domain.common.entity.UploadFile;
 import com.project.veganpleasure.domain.review.entity.Review;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Store extends BaseEntity {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "store_id")
     private Long id;
     private String name;
@@ -30,6 +31,7 @@ public class Store extends BaseEntity {
     private Long starRating;
     @Lob
     private String menu;
+    @JsonManagedReference // 순환참조 해결
     @OneToMany(mappedBy = "store")
     private List<Review> reviewList = new ArrayList<>();
     @OneToOne(fetch = FetchType.LAZY)

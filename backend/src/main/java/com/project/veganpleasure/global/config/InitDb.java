@@ -38,7 +38,7 @@ public class InitDb {
 
     @PostConstruct
     public void init() throws IOException, ParseException {
-        initService.dbInit();
+//        initService.dbInit();
     }
 
     @Component

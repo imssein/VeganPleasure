@@ -52,12 +52,4 @@ public class MemberController {
     public AccessToken requestAccessToken(@RequestHeader String refreshToken) throws TokenIsInvalidException {
         return memberService.getAccessTokenBy(refreshToken);
     }
-
-    /**
-     * 로그인 다음과 같은 방식으로 구현
-     *
-     * 로그인을 하면 액세스 토큰과 만료시간( 10분 ), 리프레쉬 토큰( 만료시간 100분 )이 주어짐
-     * 액세스 토큰의 만료시간이 지나면 재발급 받아야함
-     * 리프레쉬 토큰의 만료시간이 지나면 다시 로그인해야함
-     */
 }
