@@ -4,6 +4,7 @@ import com.project.veganpleasure.domain.common.service.UploadFileService;
 import com.project.veganpleasure.domain.store.dto.StoreDetailDto;
 import com.project.veganpleasure.domain.store.dto.StoreDto;
 import com.project.veganpleasure.domain.store.entity.District;
+import com.project.veganpleasure.domain.store.entity.Store;
 import com.project.veganpleasure.domain.store.repository.StoreRepository;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -28,8 +29,10 @@ public class StoreController {
     @ApiOperation("전체 맛집 조회")
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<StoreDto> getStores(){
-        return storeRepository.findAllFetch()
+    public List<StoreDto> getStores(@RequestParam(value = "categories", required = false) String categories,
+                                    @RequestParam(value = "vegetarianTypes", required = false) String vegetarianTypes,
+                                    @RequestParam(value = "sorted", required = false) String cond){
+        return storeRepository.findByCategoriesAndVegetarianTypes(categories, vegetarianTypes, cond)
                 .stream()
                 .map(StoreDto::new)
                 .collect(Collectors.toList());
@@ -39,7 +42,7 @@ public class StoreController {
     @GetMapping("/{district}")
     @ResponseStatus(HttpStatus.OK)
     public List<StoreDto> getStoresByDistrict(@PathVariable("district") String district){
-        return storeRepository.findAllByDistrict(findDistrict(district))
+        return storeRepository.findByDistrict(findDistrict(district))
                 .stream()
                 .map(StoreDto::new)
                 .collect(Collectors.toList());

@@ -1,5 +1,6 @@
 package com.project.veganpleasure.domain.review.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.project.veganpleasure.domain.common.entity.BaseEntity;
 import com.project.veganpleasure.domain.common.entity.UploadFile;
 import com.project.veganpleasure.domain.member.entity.Member;
@@ -13,12 +14,13 @@ import javax.persistence.*;
 @Setter(AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Review extends BaseEntity {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "review_id")
     private Long id;
     @Lob
     private String content;
     private Long starRating;
+    @JsonBackReference // 순환참조 해결
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id")
     private Store store;
