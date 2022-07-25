@@ -1,40 +1,50 @@
 package com.project.veganpleasure.global.jwt.filter;
 
-import com.project.veganpleasure.global.jwt.service.JwtService;
+import com.project.veganpleasure.global.jwt.service.JwtProvider;
+import com.project.veganpleasure.global.security.CustomPrincipalDetailsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.filter.GenericFilterBean;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.util.StringUtils;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @RequiredArgsConstructor
 @Slf4j
-public class JwtAuthenticationFilter extends GenericFilterBean {
-
-    private final JwtService jwtService;
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
+    private final JwtProvider jwtProvider;
+    private final CustomPrincipalDetailsService customPrincipalDetailsService;
 
     @Override
-    public void doFilter(ServletRequest request,
-                         ServletResponse response,
-                         FilterChain chain) throws IOException, ServletException {
-        log.info("JwtAuthenticationFilter.doFilter");
-        HttpServletRequest httpRequest = (HttpServletRequest) request;
-        String accessToken = httpRequest.getHeader("AccessToken");
+    protected void doFilterInternal(HttpServletRequest request,
+                                    HttpServletResponse response,
+                                    FilterChain filterChain)
+            throws ServletException, IOException {
+        try {
+            String jwt = request.getHeader("Authorization");
 
-        if( accessToken != null ){
-            if( jwtService.isValidToken(accessToken) ){
-                Authentication auth = jwtService.getAuthentication(accessToken);
-                SecurityContextHolder.getContext().setAuthentication(auth);
+            if (StringUtils.hasText(jwt) && jwtProvider.isValidateToken(jwt)) {
+                String userEmail = jwtProvider.getEmailFromAccessToken(jwt);
+
+                UserDetails userDetails = customPrincipalDetailsService.loadUserByUsername(userEmail);
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                        userDetails, null, userDetails.getAuthorities());
+                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
+                SecurityContextHolder.getContext().setAuthentication(authentication);
             }
+        } catch (Exception ex) {
+            log.error("Could not set user authentication in security context", ex);
         }
 
-        chain.doFilter(request, response);
+        filterChain.doFilter(request, response);
     }
 }

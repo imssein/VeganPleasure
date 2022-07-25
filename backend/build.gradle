@@ -55,6 +55,8 @@ dependencies {
 	// file upload test를 위함
 	compileOnly group: 'commons-fileupload', name: 'commons-fileupload', version: '1.4'
 	compileOnly group: 'commons-io', name: 'commons-io', version: '2.4'
+
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 }
 
 tasks.named('test') {

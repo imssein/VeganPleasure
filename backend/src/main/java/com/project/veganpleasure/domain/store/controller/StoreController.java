@@ -6,6 +6,8 @@ import com.project.veganpleasure.domain.store.dto.StoreDto;
 import com.project.veganpleasure.domain.store.entity.District;
 import com.project.veganpleasure.domain.store.entity.Store;
 import com.project.veganpleasure.domain.store.repository.StoreRepository;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
@@ -29,6 +31,17 @@ public class StoreController {
     @ApiOperation("전체 맛집 조회")
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "categories",
+                    value = "카테고리"
+            ),
+            @ApiImplicitParam(name = "vegetarianTypes",
+                    value = "채식타입"
+            ),
+            @ApiImplicitParam(name = "categories",
+                    value = "정렬 기준 ( starRating / likes )"
+            )
+    })
     public List<StoreDto> getStores(@RequestParam(value = "categories", required = false) String categories,
                                     @RequestParam(value = "vegetarianTypes", required = false) String vegetarianTypes,
                                     @RequestParam(value = "sorted", required = false) String cond){
@@ -41,6 +54,12 @@ public class StoreController {
     @ApiOperation("지역에 따른 맛집 조회")
     @GetMapping("/{district}")
     @ResponseStatus(HttpStatus.OK)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "district",
+                    value = "지역",
+                    paramType = "path",
+                    required = true)
+    })
     public List<StoreDto> getStoresByDistrict(@PathVariable("district") String district){
         return storeRepository.findByDistrict(findDistrict(district))
                 .stream()
@@ -51,6 +70,12 @@ public class StoreController {
     @ApiOperation("맛집 상세 조회")
     @GetMapping("/detail/{id}")
     @ResponseStatus(HttpStatus.OK)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id",
+                    value = "지역",
+                    paramType = "path",
+                    required = true)
+    })
     public List<StoreDetailDto> getStore(@PathVariable("id") Long id){
         List<StoreDetailDto> list = new ArrayList<>();
         list.add(new StoreDetailDto(storeRepository.findByIdFetch(id)));

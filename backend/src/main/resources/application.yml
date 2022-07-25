@@ -35,9 +35,5 @@ JWT:
     TOKEN:
       VALIDITY: 600000 # 10분
 
-  REFRESH:
-    TOKEN:
-      VALIDITY: 6000000 # 100분
-
 file:
   dir: C:\Users\Yanglet\vegan_pleasure_images\
