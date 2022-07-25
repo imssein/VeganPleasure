@@ -1,8 +1,8 @@
 package com.project.veganpleasure.global.config;
 
 import com.project.veganpleasure.global.jwt.filter.JwtAuthenticationFilter;
-import com.project.veganpleasure.global.jwt.service.JwtService;
-import com.project.veganpleasure.global.security.PrincipalDetailsService;
+import com.project.veganpleasure.global.jwt.service.JwtProvider;
+import com.project.veganpleasure.global.security.CustomPrincipalDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,9 +19,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private final PrincipalDetailsService principalDetailsService;
+    private final CustomPrincipalDetailsService principalDetailsService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final JwtService jwtService;
+    private final JwtProvider jwtProvider;
 
     @Bean
     @Override
@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeHttpRequests()
                 .antMatchers("/**").permitAll()
                 .and()
-                .addFilterBefore(new JwtAuthenticationFilter(jwtService)
+                .addFilterBefore(new JwtAuthenticationFilter(jwtProvider, principalDetailsService)
                         , UsernamePasswordAuthenticationFilter.class);
     }
 }
